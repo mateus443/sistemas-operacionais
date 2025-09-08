@@ -134,3 +134,5 @@ Desvantagens:
 - Problemas de segurança/isolamento (um processo pode corromper dados de outro).
 - Consistência de cache/cc numa arquitetura multiprocessador pode exigir cuidados.
 */
+
+Aluno: Mateus Pinheiro de Sousa Engenharia de Software quarto período
