@@ -1,138 +1,131 @@
-// 1) Qual a diferença entre programa e processo?
-/* Resposta:
-Um programa é um conjunto estático de instruções (arquivo executável, código). 
-Um processo é uma instância em execução desse programa — é dinâmico e inclui o estado em tempo de execução (contador de programa, registradores), memória alocada, descritores de arquivo e outros recursos. 
+1) Qual a diferença entre programa e processo?
+
+Resposta:
+Um programa é um conjunto estático de instruções (arquivo executável, código).
+Um processo é a instância em execução desse programa — inclui estado em tempo de execução (contador de programa, registradores), memória alocada, descritores de arquivo e outros recursos.
 Programa = código; Processo = programa + contexto + recursos + execução.
-*/
 
-// 2) Quais são os estados de um processo e quando ocorrem as transições?
-/* Resposta:
-Estados comuns: NEW (criado), READY (pronto/na fila), RUNNING (executando), BLOCKED/WAITING (esperando I/O ou evento), TERMINATED/EXIT (finalizado).
+2) Quais são os estados de um processo e quando ocorrem as transições?
+
+Resposta:
+Estados comuns: NEW (criado), READY (pronto na fila), RUNNING (executando), BLOCKED ou WAITING (esperando por entrada e saída ou evento), TERMINATED ou EXIT (finalizado).
 Transições típicas:
-- NEW -> READY: admitido pelo SO.
+- NEW -> READY: admitido pelo sistema operacional.
 - READY -> RUNNING: escalonador faz dispatch.
-- RUNNING -> BLOCKED: faz uma operação de I/O ou espera por evento.
-- BLOCKED -> READY: I/O/evento concluído.
-- RUNNING -> READY: preempção (tempo esgotou).
-- RUNNING -> TERMINATED: processo termina/exita.
-*/
+- RUNNING -> BLOCKED: faz operação de entrada e saída ou espera por evento.
+- BLOCKED -> READY: operação de entrada e saída ou evento concluído.
+- RUNNING -> READY: preempção por esgotamento de tempo.
+- RUNNING -> TERMINATED: processo termina.
 
-// 3) O que contém um Process Control Block (PCB)?
-/* Resposta:
+3) O que contém um Process Control Block (PCB)?
+
+Resposta:
 - Identificador do processo (PID)
 - Estado do processo
-- Registradores CPU + contador de programa (PC)
-- Informação de escalonamento (prioridade, tempo já usado)
-- Ponteiros para tabelas de memória (TSS, page tables)
-- Informações de I/O (descritores/arquivos abertos)
+- Registradores da CPU e contador de programa
+- Informação de escalonamento (prioridade, tempo usado)
+- Ponteiros para tabelas de memória
+- Informações de entrada e saída (descritores/arquivos abertos)
 - Contas e estatísticas (tempo CPU, limites)
-- Informações de controle (PID do pai, lista de filhos, sinais/perm.)
-*/
+- Informações de controle (PID do pai, lista de filhos, sinais e permissões)
 
-// 4) O que acontece com os recursos de um processo quando ele termina?
-/* Resposta:
-O SO libera recursos alocados: memória, page tables, descritores de arquivo, locks, alocações de kernel. O status de término e o código de saída são mantidos até o pai chamar wait(); enquanto isso o processo pode virar um zumbi. Se o pai morrer antes de wait, o init (PID 1) geralmente adota e faz wait para reapear.
-*/
+4) O que acontece com os recursos de um processo quando ele termina?
 
-// 5) Qual a diferença entre fork() e exec() no UNIX?
-/* Resposta:
-- fork(): cria um novo processo duplicando o processo atual (pai e filho continuam executando, retornos diferentes). Copia o contexto (em muitos sistemas é copy-on-write).
-- exec(): substitui a imagem do processo (código e dados) pelo novo programa especificado — o PID permanece, não cria novo processo.
-Fluxo típico: fork() cria filho → filho chama exec() para executar outro programa.
-*/
+Resposta:
+O sistema operacional libera recursos alocados: memória, tabelas de páginas, descritores de arquivo, locks, estruturas do kernel. O status de término e o código de saída são mantidos até o pai chamar wait ou waitpid; enquanto isso o processo pode virar zumbi. Se o pai morrer sem colher, init com PID 1 geralmente adota o filho e faz wait.
 
-// 6) Como funciona a hierarquia de processos em UNIX?
-/* Resposta:
-Processos têm relações pai/filho (getppid/getpid). O processo init (PID 1) é antecessor de processos órfãos — quando um pai termina sem fazer wait(), filhos órfãos são reparented para init que faz reap. Existem também grupos de processos e sessões (usados para job control): líderes de sessão, grupos de processos, sinais podem ser enviados ao grupo.
-*/
+5) Qual a diferença entre fork e exec no UNIX?
 
-// 7) Compare memória compartilhada e troca de mensagens (IPC).
-/* Resposta:
+Resposta:
+- fork cria um novo processo duplicando o processo atual. Pai e filho continuam executando com retornos diferentes. Em muitos sistemas usa copy on write.
+- exec substitui a imagem do processo atual pelo novo programa especificado, mantendo o mesmo PID.
+Fluxo típico: fork cria o filho, o filho chama exec para executar outro programa.
+
+6) Como funciona a hierarquia de processos em UNIX?
+
+Resposta:
+Processos têm relações pai e filho. Existem funções para obter PID e PID do pai, como getpid e getppid. Quando um pai termina sem colher o status dos filhos, processos órfãos são reparented para init (PID 1) que faz wait. Existem também grupos de processos e sessões usados para controle de jobs; sinais podem ser enviados a grupos.
+
+7) Compare memória compartilhada e troca de mensagens em IPC.
+
+Resposta:
 Memória compartilhada:
-- Comunicação por leitura/escrita direta em uma área comum.
-- Muito rápida (evita cópias via kernel).
-- Requer sincronização (semaphores/mutex) para consistência.
+- Comunicação por leitura e escrita direta em uma área comum.
+- Muito rápida, evita cópias via kernel.
+- Requer sincronização explícita com semáforos ou mutex para consistência.
 Troca de mensagens:
-- Processos trocam pacotes (mensagens) via kernel (pipes, filas, sockets).
-- Mais simples de sincronizar (envia/recebe), menos risco de corrupção de memória.
-- Pode ter overhead por cópia e chamadas de sistema.
-Resumo: memória compartilhada = mais rápida + mais complexa/susceptível a bugs; mensagens = mais segura/estruturada + overhead.
-*/
+- Processos trocam mensagens via kernel, por exemplo pipes, filas, sockets.
+- Mais simples de sincronizar; menor risco de corrupção de memória.
+- Pode ter overhead por cópias e chamadas de sistema.
+Resumo: memória compartilhada = mais rápida e complexa; mensagens = mais segura e estruturada com overhead.
 
-// 8) Cite exemplos de chamadas de sistema usadas em IPC.
- /* Resposta:
-- Pipes: pipe(), dup2()
-- FIFOs (named pipes): mkfifo(), open(), read(), write()
-- Sockets: socket(), bind(), listen(), accept(), connect(), send(), recv()
-- Shared memory (SysV): shmget(), shmat(), shmdt(), shmctl()
-- Shared memory (POSIX): shm_open(), mmap(), munmap()
-- Message queues (SysV): msgget(), msgsnd(), msgrcv(), msgctl()
-- Semáforos: semget(), semop() (SysV) / sem_open(), sem_wait(), sem_post() (POSIX)
-- POSIX message queues: mq_open(), mq_send(), mq_receive()
-*/
+8) Cite exemplos de chamadas de sistema usadas em IPC.
 
-// 9) Por que é importante que o sistema operacional faça gerenciamento de processos?
-/* Resposta:
+Resposta:
+- Pipes: pipe, dup2
+- FIFOs (named pipes): mkfifo, open, read, write
+- Sockets: socket, bind, listen, accept, connect, send, recv
+- Shared memory SysV: shmget, shmat, shmdt, shmctl
+- Shared memory POSIX: shm_open, mmap, munmap
+- Message queues SysV: msgget, msgsnd, msgrcv, msgctl
+- Semáforos SysV e POSIX: semget, semop e sem_open, sem_wait, sem_post
+- POSIX message queues: mq_open, mq_send, mq_receive
+
+9) Por que é importante que o sistema operacional faça gerenciamento de processos?
+
+Resposta:
 Porque o SO garante:
-- Compartilhamento seguro de recursos (isolamento e proteção).
-- Multiprogramação: multiplexar CPU entre várias tarefas.
-- Justiça e priorização (escalonamento) para desempenho/latência.
-- Gerenciamento de recursos (memória, I/O), prevenção/recuperação de deadlocks.
-- Contabilização e auditoria; recuperação de recursos quando processos terminam.
-Sem esse gerenciamento, processos poderiam conflitar, travar o sistema ou consumir recursos indefinidamente.
-*/
+- Compartilhamento seguro de recursos e isolamento.
+- Multiprogramação e multiplexação da CPU entre tarefas.
+- Justiça e priorização por escalonamento.
+- Gerenciamento de memória e entrada e saída, prevenção e recuperação de deadlocks.
+- Liberação de recursos quando processos terminam.
+Sem esse gerenciamento processos poderiam conflitar, travar o sistema ou consumir recursos indefinidamente.
 
-// 10) Explique a diferença entre processos independentes e processos cooperativos.
- /* Resposta:
-- Independentes: não dependem nem interagem com outros processos para executar (ex.: programas que não compartilham dados). O SO pode escalonar/terminar sem afetar os outros.
-- Cooperativos: precisam trocar informação/coordenação (via IPC) e sua execução pode depender de outros. Ex.: produtor/consumidor, processos que atualizam dados comuns. Cooperativos exigem sincronização para evitar condições de corrida.
-*/
+10) Explique a diferença entre processos independentes e processos cooperativos.
 
-// 11) O que é um processo zumbi em UNIX/Linux?
-/* Resposta:
-Um processo zumbi (zombie) é um processo que já terminou (exit) mas cujo pai ainda não chamou wait()/waitpid() para ler o código de saída. O kernel mantém uma pequena entrada (PCB) com o status de término até o pai recolher — por isso consome PID/entrada de tabela, mas não CPU nem memória de usuário. Quando o pai faz wait, o zumbi é completamente removido.
-*/
+Resposta:
+- Independentes: não dependem nem interagem com outros processos para executar; o SO pode escalonar e terminar sem afetar os outros.
+- Cooperativos: precisam trocar informações e coordenar execução via IPC; dependem uns dos outros e exigem sincronização para evitar condições de corrida.
 
-// 12) Explique a diferença entre chamadas bloqueantes e não bloqueantes em IPC.
- /* Resposta:
-- Bloqueantes: a chamada de sistema só retorna quando a operação completa (ex.: read() bloqueia até dados chegarem). O processo fica inativo até então.
-- Não bloqueantes: a chamada retorna imediatamente; se não houver dados/recursos, retorna erro ou valor indicativo (EAGAIN). O processo pode tentar novamente ou usar poll/select/epoll para saber quando operar.
-Bloqueantes simplificam o código; não bloqueantes permitem maior responsividade e escalabilidade (event-driven).
-*/
+11) O que é um processo zumbi em UNIX Linux?
 
-// 13) Qual a diferença entre processo pesado (process) e thread (processo leve)?
-/* Resposta:
-Processo (pesado):
-- Possui espaço de endereço próprio, tabela de arquivos própria (isolamento).
-- Troca de contexto mais cara (mais estado a salvar/restaurar).
-- Comunicação entre processos é via IPC.
-Thread (leve):
-- Múltiplas threads compartilham o mesmo espaço de endereço/memória e descritores.
-- Criação/alternância são mais rápidas; comunicação direta via memória compartilhada (mesmo processo).
-- Falha em uma thread pode afetar todo o processo.
-Threads permitem paralelismo mais eficiente dentro de um mesmo processo; processos fornecem isolamento maior.
-*/
+Resposta:
+Um processo zumbi é um processo que já terminou mas cujo pai ainda não chamou wait ou waitpid para ler o código de saída. O kernel mantém uma pequena entrada com o status de término até o pai recolher. Zumbis consomem entradas na tabela de processos, mas não CPU nem memória de usuário.
 
-// 14) Por que sistemas operacionais multiprogramados precisam de troca de contexto (context switch)?
-/* Resposta:
-Porque há mais de uma tarefa/processo pronto para usar a CPU. O context switch permite:
-- Compartilhar a CPU entre processos (multiprogramação), aumentando utilização da CPU.
-- Alternar para outro processo quando o atual bloqueia por I/O, assim mantendo o sistema produtivo.
-- Implementar preempção (justiça/prioridade) e responder a eventos/tempo real.
-Sem context switches, um processo poderia monopolizar a CPU e o sistema perderia responsividade.
-*/
+12) Explique a diferença entre chamadas bloqueantes e não bloqueantes em IPC.
 
-// 15) Cite vantagens e desvantagens da comunicação via memória compartilhada.
- /* Resposta:
+Resposta:
+- Bloqueantes: a chamada de sistema retorna apenas quando a operação é completada. O processo fica inativo até então.
+- Não bloqueantes: a chamada retorna imediatamente; se não houver dados ou recurso disponível, retorna com erro ou código indicativo como EAGAIN. O processo pode tentar novamente ou usar mecanismos como poll select ou epoll para saber quando operar.
+Bloqueantes simplificam o código; não bloqueantes permitem maior responsividade e escalabilidade.
+
+13) Qual a diferença entre processo pesado e thread processo leve?
+
+Resposta:
+Processo:
+- Espaço de endereço próprio e isolamento.
+- Troca de contexto mais cara.
+- Comunicação entre processos via IPC.
+Thread:
+- Múltiplas threads compartilham espaço de endereço e descritores.
+- Criação e alternância mais rápidas.
+- Comunicação direta via memória compartilhada no mesmo processo.
+Threads permitem paralelismo eficiente dentro de um processo; processos fornecem maior isolamento.
+
+14) Por que sistemas operacionais multiprogramados precisam de troca de contexto?
+
+Resposta:
+Porque há mais de uma tarefa pronta para usar a CPU. O context switch permite compartilhar a CPU, manter a utilização da CPU alta, alternar quando um processo bloqueia por entrada e saída, implementar preempção e responder a eventos. Sem troca de contexto um processo poderia monopolizar a CPU e reduzir a responsividade.
+
+15) Cite vantagens e desvantagens da comunicação via memória compartilhada.
+
+Resposta:
 Vantagens:
-- Alta performance (sem cópias entre processos).
+- Alta performance sem cópias entre processos.
 - Baixa latência e alto throughput para grandes volumes de dados.
-- Flexível (qualquer formato de dados).
+- Flexível quanto ao formato de dados.
 Desvantagens:
-- Necessidade de sincronização explícita (semaphores, mutex) — fácil gerar race conditions.
-- Difícil depuração (bugs de concorrência sutil).
-- Problemas de segurança/isolamento (um processo pode corromper dados de outro).
-- Consistência de cache/cc numa arquitetura multiprocessador pode exigir cuidados.
-*/
+- Necessidade de sincronização exp
 
 Aluno: Mateus Pinheiro de Sousa Engenharia de Software quarto período
