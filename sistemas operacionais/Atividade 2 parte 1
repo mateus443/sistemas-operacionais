@@ -1,0 +1,83 @@
+Questões 
+
+1. Quais são as vantagens e limitações de se utilizar software freeware ou de fonte aberta como o Linux? Consulte o Linux online em www.linux.org para informações adicionais.
+
+
+2. Por que empresas como a Jay Jacobs e a Burlington estão optando pelo Linux em lugar do Unix ou Windows NT para administrar suas operações?
+
+
+3. O desenvolvimento do Linux demonstra uma mudança maior no desenvolvimento de softwares possibilitado pela Internet? Por quê?
+
+
+
+Resposta única 
+
+O uso do Linux (e de software freeware / open source em geral) reúne vantagens técnicas, econômicas e organizacionais que explicam por que empresas o adotam, ao mesmo tempo em que traz limitações que precisam ser geridas — e o próprio modelo de desenvolvimento do Linux ilustra uma grande mudança trazida pela Internet na forma como software é criado, mantido e comercializado.
+
+Vantagens principais
+
+Custo menor / redução de licenciamento: muitas distribuições e softwares open source têm custo de licença muito baixo ou inexistente, reduzindo TCO (custo total de propriedade) — importante para redes de lojas/servidores em larga escala.
+
+Flexibilidade e customização: acesso ao código-fonte permite adaptar o sistema às necessidades específicas da empresa (performance, segurança, integração com sistemas legados).
+
+Independência de fornecedor (menos vendor lock-in): empresas podem evitar ficar presas a um único fornecedor ou a versões proprietárias.
+
+Estabilidade, desempenho e eficiência: Linux é amplamente usado em servidores por ser robusto, escalável e eficiente em hardware comum (x86), o que interessa a operações críticas.
+
+Segurança por transparência e comunidade: o código aberto permite auditoria, correção rápida de bugs e patches em colaboração com uma comunidade global.
+
+Ecossistema e ferramentas de rede/servidor: forte suporte a serviços de rede, bancos de dados, containers e automação — vantajoso para operações centralizadas e e-commerce.
+
+
+Limitações e desafios
+
+Curva de aprendizado e necessidade de capacitação: administrar, configurar e integrar Linux exige pessoal qualificado; treinamento e contratação podem gerar custos.
+
+Compatibilidade de software proprietário: alguns aplicativos comerciais (especialmente aplicações desktop ou softwares legados) podem não ter versões nativas; exige alternativas, adaptação ou camadas de compatibilidade.
+
+Suporte comercial variável: embora existam fornecedores (ex.: distribuições empresariais) com serviço pago, organizações que dependem de versões comunitárias precisam planejar suporte interno ou terceirizado.
+
+Fragmentação: muitas distribuições e variações podem complicar padronização; exige governança para escolher e manter uma base tecnológica coerente.
+
+Questões regulatórias/contratuais: algumas áreas exigem certificações ou compliance específicos que precisam ser verificados.
+
+
+Por que empresas (ex.: Jay Jacobs, Burlington) optam por Linux
+
+Redução de custos em larga escala: redes de lojas, data centers e servidores web beneficiam-se do menor custo de licenças e da possibilidade de usar hardware padrão.
+
+Capacidade de personalizar soluções de ponto-de-venda, inventário e integração: quando a operação requer adaptações, o acesso ao código e a possibilidade de desenvolver internamente são decisivos.
+
+Maior controle operacional e agilidade: correções e melhorias podem ser feitas sem depender do roadmap de um fornecedor proprietário; isso reduz tempo de resposta a problemas críticos.
+
+Escalabilidade e confiabilidade para serviços de back-end: Linux tradicionalmente domina servidores, redes e infraestruturas que exigem alta disponibilidade.
+
+Modelo híbrido possível: muitas empresas adotam Linux em servidores e infraestrutura, mantendo Windows/Unix apenas onde aplicações específicas o exigem — equilibrando compatibilidade e ganhos.
+
+
+O desenvolvimento do Linux como sintoma e motor de mudança impulsionada pela Internet
+
+Desenvolvimento distribuído e colaborativo: a Internet permitiu que desenvolvedores de todo o mundo colaborassem de forma assíncrona (troca de patches, revisões por pares, controle de versão), criando um modelo radicalmente diferente do desenvolvimento fechado tradicional.
+
+Velocidade de inovação e correção: bugs e vulnerabilidades são identificados e corrigidos por uma comunidade vasta, acelerando iteração e evolução.
+
+Democratização do desenvolvimento e novos modelos de negócio: qualquer um pode contribuir; empresas passaram a monetizar serviços, suporte e soluções baseadas em software livre (ex.: distribuições empresariais, consultoria, SaaS).
+
+Adoção em camadas (ecossistema): a Internet também facilitou distribuição (repositorios, downloads), documentação, comunidades e ferramentas (CI/CD, repositórios Git), tornando viável manter projetos grandes e críticos em open source.
+
+Impacto cultural e organizacional: o sucesso do Linux influenciou práticas como desenvolvimento aberto, integração contínua, plataformas colaborativas e a ideia de que software pode ser um bem coletivo com valor econômico por serviços ao redor dele.
+
+
+Conclusão prática (o que uma empresa deve avaliar)
+
+Faça uma análise de necessidades: identifique quais cargas de trabalho se adaptam bem ao Linux (servidores, web, back-office) e quais exigem software proprietário.
+
+Invista em governança e treinamento: padronize distribuições, políticas de atualização, e suporte (interno ou contratado).
+
+Considere modelos híbridos: combinar Linux para infra/servidores com outros sistemas onde necessário traz o melhor custo-benefício.
+
+Use suporte empresarial quando for crítico: contratar uma distribuição com suporte pago (ou um parceiro) mitiga riscos operacionais.
+
+
+Em suma: Linux e o software open source trazem vantagens econômicas, técnicas e estratégicas que explicam sua adoção por empresas; têm limitações reais, mas gerenciáveis; e o modo como o Linux foi desenvolvido pela Internet mudou para sempre o processo de criação de software — tornando-o mais colaborativo, rápido e voltado a serviços e ecossistemas em vez de apenas licenças.
+
