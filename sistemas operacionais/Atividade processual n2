@@ -1,0 +1,31 @@
+Resposta 3 primeiras questões:
+
+Uma empresa desejaria converter seu mainframe em um servidor de rede por vários motivos estratégicos e operacionais. Os benefícios incluem:
+
+- *Flexibilidade e escalabilidade*: Servidores de rede são mais flexíveis e escaláveis em termos de hardware e software em comparação com mainframes tradicionais, permitindo adaptações mais rápidas às necessidades da empresa.
+- *Acesso mais amplo*: Tornar os bancos de dados acessíveis a funcionários e clientes via navegadores de rede aumenta a eficiência e a colaboração, permitindo que mais pessoas acessem informações críticas de qualquer lugar.
+- *Custo-efetividade*: Servidores de rede podem ser mais econômicos do que manter um mainframe, especialmente considerando a manutenção e atualizações.
+
+Uma empresa precisa fazer para tornar seus bancos de dados baseados em computadores centrais acessíveis a funcionários e clientes que possuem navegadores de rede:
+- *Implementar interfaces web*: Desenvolver interfaces web ou APIs que permitam o acesso aos bancos de dados via navegadores de rede.
+- *Segurança e autenticação*: Garantir que o acesso aos dados seja seguro, com mecanismos de autenticação e autorização adequados para proteger informações sensíveis.
+- *Treinamento e suporte*: Ofrecer treinamento e suporte para garantir que funcionários e clientes saibam como acessar e utilizar os recursos disponibilizados.
+
+Uma empresa deve utilizar um mainframe como servidor de rede em lugar de recorrer exclusivamente a uma rede de servidores baseadas em PCs quando:
+- *Necessidade de alta segurança e confiabilidade*: Mainframes são conhecidos por sua alta confiabilidade, segurança e capacidade de processamento de grandes volumes de dados, sendo ideais para aplicações críticas.
+- *Grande volume de transações*: Se a empresa lida com um grande volume de transações ou necessita de processamento de dados em escala muito grande, um mainframe pode ser mais adequado.
+- *Legado e integração*: Se a empresa já possui investimentos significativos em mainframes e precisa manter a compatibilidade com sistemas legados, pode ser mais viável continuar utilizando o mainframe como servidor de rede.
+
+Respostas 3 ultimas questões: Companhias como a Egghead estão optando por executar suas aplicações em Unix ou outros sistemas operacionais em lugar do Windows NT, mesmo antes do lançamento do Windows 2000, provavelmente devido a vários fatores estratégicos. Isso pode incluir a busca por maior *flexibilidade e customização* para atender às necessidades específicas da empresa, a procura por *estabilidade e segurança* em sistemas operacionais que podem ser mais adequados para certas aplicações críticas, considerações sobre *custo e licenciamento* que podem influenciar a escolha do sistema operacional, e a *compatibilidade com aplicações* específicas que a empresa precisa executar. A escolha de um sistema operacional é muitas vezes uma decisão complexa que leva em conta as necessidades atuais e futuras da empresa.
+
+A Aspect Telecommunications é capaz de comprar software aplicativo com base naquilo que faz para a empresa, e não com base em qual sistema operacional ele é executado, porque as empresas geralmente *priorizam as funcionalidades e os resultados de negócios* que o software pode oferecer. Isso é possível devido à *interoperabilidade* de muitos softwares modernos, que são projetados para funcionar em vários sistemas operacionais. Essa abordagem permite às empresas focar nas necessidades de negócios sem estar excessivamente limitadas pela escolha do sistema operacional.
+
+Para a Microsoft *recapturar o sucesso anterior do Windows NT*, algumas estratégias de negócios poderiam incluir:
+- *Inovação contínua*: Manter o sistema operacional atualizado com novas funcionalidades, melhorias de segurança e desempenho para atender às necessidades em constante evolução dos usuários.
+- *Adaptabilidade*: Adaptar-se às mudanças no mercado de tecnologia, às tendências de uso de sistemas operacionais e às necessidades dos usuários, seja em ambientes de trabalho, servidores ou outras aplicações.
+- *Parcerias estratégicas*: Fortalecer parcerias com desenvolvedores de software, empresas de hardware e outros stakeholders para aumentar a adoção e integração de soluções baseadas em Windows.
+
+Para os *concorrentes da Microsoft capitalizarem sua oportunidade atual de negócios*, eles poderiam:
+- *Diferenciação*: Ofrecer funcionalidades únicas, vantagens competitivas claras ou abordagens inovadoras que os diferenciem do Windows e atraiam usuários.
+- *Foco em nichos*: Targetizar nichos de mercado específicos onde possam oferecer soluções mais adequadas ou especializadas do que as oferecidas pela Microsoft.
+- *Inovação*: Desenvolver soluções inovadoras que atendam às necessidades emergentes dos usuários, seja em termos de segurança, desempenho, facilidade de uso ou outras características valorizadas.
