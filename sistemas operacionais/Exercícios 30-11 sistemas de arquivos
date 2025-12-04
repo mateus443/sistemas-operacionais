@@ -1,0 +1,287 @@
+Sistemas de Arquivos em Sistemas Operacionais
+
+
+---
+
+1. O que é um sistema de arquivos?
+
+Um sistema de arquivos é o mecanismo utilizado pelo sistema operacional para organizar e controlar como as informações são gravadas e acessadas em dispositivos de armazenamento, como SSDs, HDs e unidades USB.
+Sem esse recurso, os dados ficariam distribuídos de forma caótica.
+Ele funciona como uma interface que permite ao usuário lidar com pastas e arquivos em vez de lidar diretamente com setores do disco.
+Exemplos comuns: NTFS, FAT32, EXT4, APFS, HFS+.
+
+
+---
+
+2. Qual é a função principal de um sistema de arquivos?
+
+A principal função é administrar o espaço de armazenamento com segurança e organização. Isso envolve:
+
+Determinar onde cada arquivo ficará no disco;
+
+Controlar quanto espaço já está sendo usado;
+
+Registrar informações adicionais sobre os arquivos (metadados);
+
+Prevenir corrupção de dados;
+
+Auxiliar na recuperação em caso de erro ou queda de energia.
+
+
+Ele garante que as informações sejam guardadas de forma consistente e acessadas rapidamente.
+
+
+---
+
+3. O que é um arquivo e como ele é representado no sistema?
+
+Um arquivo é uma unidade de dados armazenada permanentemente, podendo conter textos, imagens, programas, vídeos etc.
+Internamente, o sistema operacional associa cada arquivo a uma estrutura que guarda suas informações, como:
+
+Nome;
+
+Tamanho;
+
+Datas de criação/modificação;
+
+Permissões;
+
+Localização dos blocos físicos onde o conteúdo está armazenado.
+
+
+
+---
+
+4. O que é um diretório e qual sua função?
+
+Um diretório (ou pasta) é uma estrutura que agrupa arquivos e outros diretórios, formando uma hierarquia de organização.
+Ele contém apenas referências (nomes e endereços) aos arquivos, facilitando a navegação e a categorização.
+A combinação de diretórios e subdiretórios forma uma árvore de diretórios, típica em sistemas modernos.
+
+
+---
+
+5. Principais tipos de sistemas de arquivos
+
+Alguns dos mais usados são:
+
+FAT (FAT12, FAT16, FAT32) — simples, muito compatível, usado em dispositivos removíveis;
+
+NTFS — padrão do Windows, com suporte a segurança e arquivos grandes;
+
+EXT2/EXT3/EXT4 — usados em Linux;
+
+HFS+ e APFS — utilizados em computadores Apple;
+
+exFAT — eficiente para pendrives e cartões SD, com suporte a arquivos grandes.
+
+
+
+---
+
+6. O que é a Tabela FAT?
+
+A FAT (File Allocation Table) é uma estrutura que registra quais setores pertencem a cada arquivo.
+Ela foi criada para sistemas antigos, como o MS-DOS, e evoluiu para FAT32.
+Apesar de amplamente suportada, apresenta limitações:
+
+Tamanho máximo de arquivo limitado a 4 GB;
+
+Poucos recursos de segurança;
+
+Falta de sistema de journaling.
+Por isso, costuma ser usada apenas em dispositivos portáteis.
+
+
+
+---
+
+7. O que é o NTFS e por que ele é melhor?
+
+O NTFS foi desenvolvido pela Microsoft para substituir o FAT. Entre suas vantagens estão:
+
+Permissões avançadas de segurança (ACLs);
+
+Criptografia e compactação integradas;
+
+Suporte a arquivos e volumes muito grandes;
+
+Journaling, que permite recuperar rapidamente após falhas;
+
+Suporte a links simbólicos e cotas de disco.
+É considerado robusto, confiável e ideal para sistemas modernos do Windows.
+
+
+
+---
+
+8. O que é o EXT2?
+
+O EXT2 foi um sistema de arquivos importante no início do Linux.
+Ele usa inodes, que guardam as informações de cada arquivo, incluindo as referências aos blocos de dados.
+É rápido, mas não possui journaling, o que torna o sistema mais vulnerável caso haja desligamentos inesperados.
+
+
+---
+
+9. Diferença entre EXT2 e EXT3
+
+O EXT3 trouxe como principal novidade o journaling, recurso que registra as operações antes de aplicá-las ao disco.
+Isso evita longos processos de recuperação quando o sistema é desligado incorretamente.
+O EXT3 também é compatível com o EXT2, permitindo atualização sem perda de dados.
+Possui três modos de gravação: writeback, ordered e journal.
+
+
+---
+
+10. Vantagens do EXT4
+
+O EXT4 aprimorou o EXT3 adicionando:
+
+Suporte a arquivos gigantes (até 16 TB);
+
+Volumes muito maiores;
+
+Mecanismos que reduzem a fragmentação;
+
+Escrita adiada para melhorar desempenho;
+
+Reparação mais rápida.
+É um dos sistemas mais comuns em distribuições Linux atuais.
+
+
+
+---
+
+11. O que é journaling?
+
+Journaling é uma técnica que registra todas as operações importantes em um log antes de efetivamente alterar os dados no disco.
+Se o sistema falhar, esse log permite reconstruir as alterações pendentes, garantindo integridade e recuperando o sistema rapidamente.
+
+
+---
+
+12. O que é um inode?
+
+O inode é uma estrutura usada em sistemas Linux para armazenar informações sobre arquivos.
+Ele guarda:
+
+Tamanho;
+
+Dono e permissões;
+
+Carimbos de data e hora;
+
+Ponteiros para os blocos onde os dados estão salvos.
+
+
+Os nomes dos arquivos estão nos diretórios, que apontam para os números de inode correspondentes.
+
+
+---
+
+13. Permissões de arquivos no Linux
+
+As permissões definem quem pode ler (r), modificar (w) e executar (x) um arquivo.
+Elas se aplicam a três categorias:
+
+Usuário dono;
+
+Grupo;
+
+Outros usuários.
+
+
+Exemplo: rwxr-xr--
+
+Dono: tem acesso total;
+
+Grupo: pode ler e executar;
+
+Outros: apenas leitura.
+
+
+
+---
+
+14. Caminho absoluto vs. caminho relativo
+
+Caminho absoluto: indica a localização completa a partir do diretório raiz (/).
+Ex.: /home/usuario/arquivo.txt
+
+Caminho relativo: parte do diretório atual.
+Ex.: ../docs/imagem.png
+
+
+O absoluto é preciso; o relativo é mais flexível para scripts e navegação.
+
+
+---
+
+15. Link simbólico vs. link físico
+
+Link simbólico (symlink): funciona como um atalho apontando para outro arquivo.
+Se o destino for removido, o link se torna inválido.
+
+Link físico (hard link): é outra entrada para o mesmo inode.
+Mesmo que uma das referências seja apagada, o arquivo continua existindo enquanto restarem links.
+
+
+
+---
+
+16. O que é montar um sistema de arquivos?
+
+Montar significa conectar um dispositivo de armazenamento a um ponto da estrutura de diretórios.
+Exemplo:
+mount /dev/sdc1 /mnt/usb
+Isso faz com que os dados do dispositivo apareçam naquela pasta.
+Desmontar (umount) remove essa associação.
+
+
+---
+
+17. O que é alocação contígua?
+
+É a técnica em que um arquivo é salvo em blocos consecutivos no disco.
+Pontos positivos: acesso muito rápido.
+Pontos negativos: dificuldade para expandir o arquivo e maior fragmentação externa.
+
+
+---
+
+18. O que é alocação encadeada?
+
+Nesta técnica, cada bloco contém um ponteiro para o próximo bloco pertencente ao arquivo.
+Permite expansão fácil, mas o acesso a posições específicas é lento, pois é necessário percorrer os blocos em sequência.
+
+
+---
+
+19. O que é alocação indexada?
+
+Um bloco especial armazena todos os endereços dos blocos de dados do arquivo.
+Isso facilita acesso direto e melhora a eficiência em arquivos grandes.
+Os sistemas UNIX utilizam variações dessa técnica por meio dos inodes e seus ponteiros diretos e indiretos.
+
+
+---
+
+20. Por que os sistemas de arquivos são tão importantes?
+
+Eles garantem que as informações sejam armazenadas de maneira segura, organizada e eficiente.
+Sem eles, não haveria controle sobre onde os dados ficam, quem pode acessá-los ou como recuperá-los.
+Com o crescimento da quantidade de dados, os sistemas de arquivos se tornam essenciais para garantir:
+
+Performance;
+
+Segurança;
+
+Integridade;
+
+Escalabilidade;
+
+Compatibilidade entre dispositivos.
+
+
+
