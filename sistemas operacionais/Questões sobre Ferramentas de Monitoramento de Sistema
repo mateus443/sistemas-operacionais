@@ -1,0 +1,413 @@
+Questões sobre Ferramentas de Monitoramento de Sistema — Respostas
+
+
+---
+
+1. Comparação de Finalidade e Acesso: Monitor de Atividade × top × Gerenciador de Tarefas
+
+Monitor de Atividade (macOS) e Gerenciador de Tarefas (Windows)
+→ São ferramentas gráficas (GUI), orientadas a usuários finais.
+→ Focam na visualização intuitiva: gráficos, abas e filtros.
+→ Acesso por ícones, busca ou menus.
+
+top (Linux)
+→ Ferramenta baseada em terminal (CLI).
+→ Ideal para administradores de sistema, uso remoto e servidores.
+→ Exibe dados em modo texto, atualizando em tempo real.
+
+
+Principal diferença:
+
+Monitor de Atividade / Gerenciador de Tarefas: foco na facilidade de uso, interface visual.
+
+top: foco técnico, acesso via linha de comando, leve e ideal para ambientes sem interface.
+
+
+Alinhamento do Gerenciador de Tarefas:
+Ele funciona exatamente como o Monitor de Atividade, pois ambos são GUIs para monitorar recursos do sistema.
+
+
+---
+
+2. Monitoramento de CPU — Como encontrar o processo que mais consome CPU
+
+No macOS – Monitor de Atividade
+
+1. Abrir Monitor de Atividade.
+
+
+2. Ir para a aba CPU.
+
+
+3. Clicar na coluna % CPU para ordenar.
+
+
+4. O processo no topo está consumindo mais CPU.
+
+
+
+
+---
+
+No Windows – Gerenciador de Tarefas
+
+1. Pressionar Ctrl + Shift + Esc.
+
+
+2. Abrir a aba Processos.
+
+
+3. Clicar em CPU para ordenar por uso.
+
+
+4. O que tiver maior porcentagem está usando mais CPU.
+
+
+
+
+---
+
+No Linux – top
+
+1. Abrir terminal.
+
+
+2. Digitar:
+
+top
+
+
+3. A coluna %CPU mostra o uso.
+
+
+4. O topo da lista geralmente é o que mais consome.
+
+Para ordenar manualmente por CPU: pressione P.
+
+
+
+
+
+---
+
+3. Análise de Memória — Como o top exibe e quais métricas importam?
+
+Monitor de Atividade e Gerenciador de Tarefas
+
+Mostram:
+
+Memória física usada
+
+Cache
+
+Swap
+
+Pressão de memória (macOS)
+
+Gráficos
+
+
+top (Linux)
+
+Na parte superior:
+
+Mem: total, usada, livre, buffers/cache
+
+Swap: total, usada, livre
+
+
+Nas colunas dos processos:
+
+RES (Resident Set Size): memória real usada pelo processo (a mais relevante)
+
+VIRT (Virtual Memory): inclui memória mapeada, não necessariamente usada
+
+SHR: memória compartilhada
+
+%MEM: porcentagem do total de RAM usada pelo processo
+
+
+Métricas mais importantes:
+
+RES → consumo real de RAM
+
+%MEM → percentual usado
+
+SWAP usada → indica pressão de memória
+
+
+
+---
+
+4. Processos e PIDs — importância e como usar para encerrar processos
+
+O PID (Process ID) identifica de forma única cada processo ativo no sistema.
+É essencial para:
+
+Encerrar processos manualmente
+
+Verificar travamentos
+
+Monitorar filhos e hierarquia
+
+Debugging e automação
+
+
+Onde aparece:
+
+Monitor de Atividade: coluna “PID”
+
+Gerenciador de Tarefas: PID aparece na aba “Detalhes”
+
+top: coluna PID
+
+
+Encerrar um processo pelo PID:
+
+macOS
+
+1. Localizar o PID no Monitor de Atividade
+
+
+2. Botão X (Forçar Encerrar)
+
+
+
+Via terminal:
+
+kill -9 PID
+
+
+---
+
+Windows
+
+1. Abrir Gerenciador de Tarefas
+
+
+2. Aba Detalhes
+
+
+3. Clicar no processo → Finalizar tarefa
+
+
+
+Via terminal (PowerShell/CMD):
+
+taskkill /PID 1234 /F
+
+
+---
+
+Linux
+
+Via top:
+
+Pressione k, digite o PID.
+
+
+Via terminal:
+
+kill PID
+kill -9 PID   (forçar)
+
+
+---
+
+5. Diferença na Interface
+
+Monitor de Atividade (GUI visual)
+→ Gráficos em tempo real, abas (CPU, Memória, Disco, Rede).
+
+Gerenciador de Tarefas (GUI visual)
+→ Interface simples, moderna, com abas e gráficos.
+
+top (linha de comando)
+→ Interface textual, atualização contínua, sem gráficos.
+→ Navegação via teclado.
+
+
+Mais visual:
+→ Monitor de Atividade e Gerenciador de Tarefas
+Mais orientado a texto:
+→ top
+
+
+---
+
+6. Monitoramento de Rede
+
+Monitor de Atividade (macOS)
+
+Aba Rede mostra:
+
+Taxas de envio/recebimento
+
+Processos que estão usando rede
+
+Pacotes e bytes trafegados
+
+
+
+
+---
+
+Gerenciador de Tarefas (Windows)
+
+Aba Desempenho → Ethernet/Wi-Fi
+
+Aba Processos mostra uso de rede por processo
+
+Gráficos em tempo real
+
+
+
+---
+
+Linux – alternativa ao top
+
+Ferramentas equivalentes:
+
+nethogs → tráfego por processo (o mais semelhante)
+
+iftop → tráfego por IP
+
+ss ou netstat → conexões e portas
+
+
+Exemplo:
+
+sudo nethogs
+
+
+---
+
+7. Análise de Disco
+
+Monitor e Gerenciador de Tarefas
+
+Possuem seções que mostram:
+
+Leitura por segundo (Read/s)
+
+Escrita por segundo (Write/s)
+
+Processos que estão usando o disco
+
+
+Importância de monitorar o disco:
+
+Detectar gargalos de I/O
+
+Identificar processos que tornam o sistema lento
+
+Detectar falhas no disco
+
+Analisar desempenho de bancos de dados e servidores
+
+
+
+---
+
+Linux (top + ferramentas complementares)
+
+O top tradicional não exibe I/O de disco detalhadamente, por isso usa-se:
+
+iotop (mais usado)
+
+sudo iotop
+
+Mostra:
+
+Leitura/escrita por processo
+
+Total de I/O
+
+
+iostat
+
+iostat -x
+
+
+---
+
+8. Hierarquia de Processos
+
+Monitor de Atividade
+
+Não exibe árvore de processos de forma explícita
+
+Interface é mais plana
+
+
+
+---
+
+Gerenciador de Tarefas
+
+Também mostra processos de forma plana
+
+Mas no Windows 11 há agrupamento por aplicativo, não por hierarquia real
+
+
+
+---
+
+Linux — top
+
+O top pode ser configurado para mostrar hierarquia:
+
+Dentro do top:
+
+Pressionar V (process tree mode)
+
+
+Ferramentas complementares:
+
+pstree (melhor opção)
+
+
+pstree -p
+
+Mostra árvore completa com PIDs.
+
+
+---
+
+9. Uso em Servidores vs. Desktops
+
+Mais adequado para servidores:
+
+➡ top
+Por quê?
+
+Funciona sem interface gráfica
+
+Consome praticamente zero recursos
+
+Ideal para conexões remotas via SSH
+
+Sempre disponível em distribuições Linux
+
+Permite automação via scripts e comandos adicionais
+
+
+Mais adequados para desktops:
+
+➡ Monitor de Atividade (macOS)
+➡ Gerenciador de Tarefas (Windows)
+
+Porque:
+
+Possuem interface gráfica
+
+São intuitivos
+
+Trazem gráficos e seções organizadas
+
+Mais amigáveis para usuários não técnicos
+
+
+
+
+
